@@ -17,7 +17,7 @@ A documentação foi organizada em seções direcionadas para cada perfil de usu
 3. **[Guia da Secretaria Acadêmica](source/secretaria.rst)**:
    Instruções para a equipe de registro escolar sobre como habilitar diários e cursos no SUAP para que a sincronização ocorra, além de guias de resolução para problemas comuns de acesso.
 4. **[Guia do Professor (Docente)](source/professor.rst)**:
-   Manual prático explicando como solicitar a sincronização de diários, como puxar notas do Moodle para o SUAP e a **configuração crítica e obrigatória do livro de notas do Moodle** utilizando os identificadores (`idnumber`) **`N1`**, **`N2`**, **`N3`**, **`N4`** ou **`NAF`**.
+   Manual prático explicando como solicitar a sincronização de diários, como puxar notas do Moodle para o SUAP e a **configuração crítica e obrigatória do livro de notas do Moodle**.
 
 ---
 
