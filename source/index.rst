@@ -17,7 +17,8 @@ A documentação foi organizada em seções direcionadas para cada perfil de usu
 3. :doc:`Guia da Secretaria Acadêmica <secretaria>`: Instruções para a equipe de registro escolar sobre como habilitar diários e cursos no SUAP para que a sincronização ocorra, além de guias de resolução para problemas comuns de acesso.
 4. :doc:`Guia do Professor (Docente) <professor>`: Manual prático explicando como solicitar a sincronização de diários, como puxar notas do Moodle para o SUAP e a **configuração crítica e obrigatória do livro de notas do Moodle**.
 
-## Por que usar?
+Por que usar?
+-------------------------
 
 +---------------------------------------------------+-------------------------------------------------------+
 | Problema comum                                    | Como a Suite resolve                                  |
