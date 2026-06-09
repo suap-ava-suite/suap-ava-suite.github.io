@@ -6,11 +6,12 @@ Esta seção apresenta a **SUAP/AVA Suite** sob uma perspectiva gerencial, expli
 O que é a SUAP/AVA Suite?
 -------------------------
 
-A **SUAP/AVA Suite** é um ecossistema de integração e centralização de serviços acadêmicos que conecta o **SUAP** (Sistema Unificado de Administração Pública) e o **Moodle** (Ambiente Virtual de Aprendizagem - AVA). 
+A **SUAP/AVA Suite** é um ecossistema open-source de integração entre **Sistemas de Gestão Acadêmica (SGA)** — como o SUAP, SIGAA e qAcadêmico — e o **Moodle LMS**. Com ela, instituições de ensino eliminam o trabalho manual de sincronização de turmas, alunos e professores: tudo flui automaticamente do SGA para o AVA, com notas e frequências sincronizadas de volta.
 
-O IFRN possui uma infraestrutura descentralizada com múltiplas instâncias do Moodle (ex.: Moodle Acadêmico, Moodle Presencial, Moodle Aberto). A suíte serve como o elo de ligação entre o sistema de registro oficial (SUAP) e essas salas de aula virtuais.
+> 🎯 **Projetada pela tradição inovadora do IFRN, pronta para qualquer instituição** que use o SUAP e o Moodle.
 
-.. image:: https://raw.githubusercontent.com/cte-zl-ifrn/.github/main/painel_ava-visao-geral.png
+.. image:: https://raw.githubusercontent.com/suap-ava-suite/cdn-suap_ava_suite/main/assets/diagram.png
+   :width: 100%
    :alt: Visão do Ecossistema
    :align: center
 
