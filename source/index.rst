@@ -28,12 +28,3 @@ A documentação foi organizada em seções direcionadas para cada perfil de usu
 +---------------------------------------------------+-------------------------------------------------------+
 | Alunos perdem cursos espalhados em vários Moodles | Painel unificado com todos os cursos em um só lugar   |
 +---------------------------------------------------+-------------------------------------------------------+
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Sumário:
-
-   visao_geral
-   desenvolvimento_implantacao
-   secretaria
-   professor
