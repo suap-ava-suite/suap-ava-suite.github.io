@@ -1,14 +1,14 @@
 Visão Geral da SUAP/AVA Suite
 =============================
 
-Esta seção apresenta a **SUAP/AVA Suite** sob uma perspectiva gerencial, explicando o que é a solução, quais problemas ela resolve e quais são seus principais benefícios.
-
 O que é a SUAP/AVA Suite?
 -------------------------
 
 A **SUAP/AVA Suite** é um ecossistema open-source de integração entre **Sistemas de Gestão Acadêmica (SGA)** — como o SUAP, SIGAA e qAcadêmico — e o **Moodle LMS**. Com ela, instituições de ensino eliminam o trabalho manual de sincronização de turmas, alunos e professores: tudo flui automaticamente do SGA para o AVA, com notas e frequências sincronizadas de volta.
 
-> 🎯 **Projetada pela tradição inovadora do IFRN, pronta para qualquer instituição** que use o SUAP e o Moodle.
+
+Visão arquitetural
+------------------
 
 .. image:: https://raw.githubusercontent.com/suap-ava-suite/cdn-suap_ava_suite/main/assets/diagram.png
    :width: 100%
