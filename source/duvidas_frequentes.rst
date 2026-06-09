@@ -3,11 +3,7 @@ Dúvidas Frequentes (FAQ)
 
 Esta seção reúne as principais perguntas e respostas enviadas pela comunidade sobre a integração entre o SUAP e o Moodle, organizadas para facilitar a consulta de acordo com cada perfil de atuação: **TIC**, **Professores** e **Secretaria Acadêmica**.
 
-.. contents:: Perfis de Acesso
-   :local:
-   :depth: 2
 
----
 
 TIC (Tecnologia da Informação e Comunicação)
 --------------------------------------------
