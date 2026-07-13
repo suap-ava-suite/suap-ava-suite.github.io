@@ -47,6 +47,17 @@ A SUAP/AVA Suite é composta pelos seguintes softwares:
 * **tool_painelava**: Plugin administrativo para Moodle que fornece APIs de leitura de cursos ao Painel AVA.
 * **tool_sga**: Plugin administrativo (em desenvolvimento) para estender a integração a outros sistemas acadêmicos genéricos (como SIGAA ou qAcadêmico).
 
+Fluxos de Integração e Status
+-----------------------------
+
+O ecossistema é estruturado em torno de fluxos de integração específicos:
+
+* **Painel AVA ➔ tool_painelava** (Status: **Final / Estável**): Canal de leitura que possibilita ao Painel AVA listar em tempo real todos os cursos e diários do usuário final.
+* **SUAP ➔ Integrador AVA ➔ local_suap** (Status: **Final / Estável**): Fluxo de escrita e sincronização bidirecional que cria diários, inscreve alunos/professores no Moodle e retorna notas/frequências ao SUAP.
+* **SUAP ➔ Integrador AVA ➔ tool_sga** (Status: **Beta / Em desenvolvimento**): Canal planejado para compatibilizar a suite com outros SGAs (SIGAA, qAcadêmico, etc.).
+* **Painel AVA ➔ local_suap** (Status: **Descontinuado**): Fluxo legado que foi descontinuado e substituído de forma definitiva pelo uso do `tool_painelava`.
+
+
 Principais Benefícios
 ---------------------
 
@@ -54,3 +65,24 @@ Principais Benefícios
 * **Redução de Suporte**: Login unificado via SUAP SSO e portal único (Painel AVA) reduzem drasticamente chamados por perda de senha ou "curso sumido".
 * **Agilidade no Início do Período**: Cursos e turmas criados em segundos pela secretaria ou pelo próprio docente.
 * **Segurança e Integridade**: Notas importadas diretamente do Moodle para o SUAP, sem retrabalho de digitação.
+
+Comunidade, Reporte de Bugs e Contribuições
+-------------------------------------------
+
+Para acompanhar o desenvolvimento, discutir melhorias ou tirar dúvidas com outros usuários da suite:
+
+* **Canal Oficial no Telegram**: Acesse `https://t.me/+1hE3euH9Vnw4MmYx <https://t.me/+1hE3euH9Vnw4MmYx>`_ para acompanhar novidades, anúncios de novas versões e discussões sobre bugs da suite.
+
+Se você encontrar algum bug ou quiser solicitar novos recursos, as solicitações devem ser abertas diretamente no repositório do projeto correspondente no GitHub:
+
+* **Repositório da Documentação / Site**: `suap-ava-suite.github.io <https://github.com/suap-ava-suite/suap-ava-suite.github.io>`_
+* **Orquestrador de Ambientes (Workspace)**: `workspace <https://github.com/suap-ava-suite/workspace>`_
+* **Middleware Django**: `djangoapp-integrador_ava <https://github.com/suap-ava-suite/djangoapp-integrador_ava>`_
+* **Dashboard Django**: `djangoapp-painel_ava <https://github.com/suap-ava-suite/djangoapp-painel_ava>`_
+* **Plugin Moodle de Autenticação**: `moodle-auth_suap <https://github.com/suap-ava-suite/moodle-auth_suap>`_
+* **Plugin Moodle de Sincronização Local**: `moodle-local_suap <https://github.com/suap-ava-suite/moodle-local_suap>`_
+* **Plugin Moodle Administrativo do Painel**: `moodle-tool_painelava <https://github.com/suap-ava-suite/moodle-tool_painelava>`_
+* **Plugin Moodle Administrativo de SGA Genérico**: `moodle-tool_sga <https://github.com/suap-ava-suite/moodle-tool_sga>`_
+
+**Melhor ainda**: Faça um **fork** do repositório correspondente, implemente a correção ou melhoria e abra um **Pull Request (PR)** solicitando a incorporação do seu código à branch principal. Toda colaboração da comunidade é muito bem-vinda!
+

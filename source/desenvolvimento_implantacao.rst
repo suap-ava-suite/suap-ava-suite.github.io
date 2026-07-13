@@ -34,8 +34,8 @@ Requisitos de Ambiente
 
 * Docker e Docker Compose Plugin
 * Git
-* Python 3.12+ (para desenvolvimento local de `integrador_ava` e `painel_ava`)
-* PHP 7.4+ (para desenvolvimento de plugins Moodle)
+* Python 3.14+ (para desenvolvimento local de `integrador_ava` e `painel_ava`)
+* PHP 8.2+ (para desenvolvimento de plugins Moodle)
 
 Desenvolvimento Local
 ---------------------
@@ -70,24 +70,90 @@ Cada componente do ecossistema possui seu próprio repositório. Para iniciar o 
 Configuração das Aplicações
 ---------------------------
 
-### 1. Variáveis de Ambiente Críticas
+1. Variáveis de Ambiente Críticas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tanto o **Integrador AVA** quanto o **Painel AVA** requerem configurações via variáveis de ambiente. Crie um arquivo `.env` contendo:
+Tanto o **Integrador AVA** quanto o **Painel AVA** requerem configurações via variáveis de ambiente. Elas devem ser preenchidas no arquivo ``.env`` para rodar localmente ou configuradas diretamente nas diretivas do container Docker no deploy de produção.
 
-* **Integrador AVA (`integrador_ava`)**:
-  
-  * `SUAP_INTEGRADOR_KEY`: Token de API que o SUAP deve enviar no cabeçalho `Authentication: Token <SUAP_INTEGRADOR_KEY>`.
-  * `DJANGO_SECRET_KEY`: Chave secreta única do Django.
-  * `SUAP_BASE_URL`: URL base do SUAP para fins de logout e redirect.
+Para referências detalhadas de todas as configurações e variáveis de ambiente disponíveis de cada projeto, consulte:
 
-* **Painel AVA (`painel_ava`)**:
-  
-  * `DJANGO_SECRET_KEY`: Chave secreta única do Django.
-  * `OAUTH_CLIENT_ID` e `OAUTH_CLIENT_SECRET`: Credenciais do cliente OAuth2 criadas no SUAP para autenticação única.
-  * `OAUTH_BASE_URL`: URL do provedor OAuth2 (SUAP).
-  * `OAUTH_REDIRECT_URI`: Endereço de callback (ex.: `https://ava.zl.ifrn.edu.br/authenticate/`).
+* :doc:`Configurações Detalhadas do Painel AVA <settings_painel>`
+* :doc:`Configurações Detalhadas do Integrador AVA <settings_integrador>`
 
-### 2. Cadastro de Ambientes no Django Admin
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   settings_painel
+   settings_integrador
+
+As variáveis críticas de ambiente de ambas as aplicações estão listadas na tabela abaixo:
+
+
+.. list-table:: Variáveis de Ambiente - Integrador e Painel
+   :widths: 20 15 65
+   :header-rows: 1
+
+   * - Variável
+     - Aplica-se a
+     - Descrição / Exemplo de Valor
+   * - ``DJANGO_SECRET_KEY``
+     - Ambos
+     - Chave secreta exclusiva do Django para fins de segurança e hashing. Deve ser uma string longa e aleatória (mínimo de 50 caracteres).
+   * - ``DJANGO_DEBUG``
+     - Ambos
+     - Define o modo debug. Definir como ``False`` em produção para garantir segurança e performance.
+   * - ``DJANGO_ALLOWED_HOSTS``
+     - Ambos
+     - Domínios ou IPs autorizados a servir o Django (ex: ``ava.suainstituicao.edu.br`` para o Painel, ou ``integrador.suainstituicao.edu.br`` para o Integrador).
+   * - ``POSTGRES_HOST``
+     - Ambos
+     - O host de rede do banco de dados PostgreSQL (ex: ``db``).
+   * - ``POSTGRES_DATABASE``
+     - Ambos
+     - Nome do banco de dados (ex: ``integrador`` para o Integrador e ``painel`` para o Painel).
+   * - ``POSTGRES_USER``
+     - Ambos
+     - Usuário de autenticação no PostgreSQL.
+   * - ``POSTGRES_PASSWORD``
+     - Ambos
+     - Senha do usuário do banco de dados.
+   * - ``OAUTH_BASE_URL``
+     - Ambos
+     - URL base do SUAP/SGA que atuará como provedor de identidade (ex: ``https://suap.suainstituicao.edu.br``).
+   * - ``OAUTH_CLIENT_ID``
+     - Ambos
+     - Client ID gerado no SUAP/SGA ao registrar a aplicação correspondente.
+   * - ``OAUTH_CLIENT_SECRET``
+     - Ambos
+     - Client Secret correspondente ao Client ID gerado no SUAP/SGA.
+   * - ``OAUTH_REDIRECT_URI``
+     - Ambos
+     - URL de callback da aplicação OAuth2. Ex: ``https://ava.suainstituicao.edu.br/authenticate/`` para o Painel.
+   * - ``SUAP_INTEGRADOR_KEY``
+     - Ambos
+     - Token de segurança compartilhado. O SUAP deve enviar no cabeçalho ``Authorization: Token <TOKEN>`` ao chamar as APIs do Integrador.
+   * - ``SUAP_BASE_URL``
+     - Integrador
+     - Equivalente à URL base do SUAP utilizada para validações e redirecionamentos.
+   * - ``SENTRY_DNS``
+     - Ambos
+     - (Opcional) DSN do projeto correspondente no Sentry para captura e monitoramento de erros de runtime.
+   * - ``SENTRY_ENVIRONMENT``
+     - Ambos
+     - (Opcional) Classificação de ambiente no Sentry (ex: ``production``, ``development``).
+   * - ``SHOW_VLIBRAS``
+     - Painel
+     - (Opcional) Define se exibe o widget de acessibilidade em Libras. Valores: ``True`` ou ``False``.
+   * - ``SHOW_USERWAY``
+     - Painel
+     - (Opcional) Habilita o widget de acessibilidade do UserWay. Valores: ``True`` ou ``False``.
+   * - ``USERWAY_ACCOUNT``
+     - Painel
+     - (Opcional) ID da conta do UserWay associada, caso o widget esteja ativo.
+
+2. Cadastro de Ambientes no Django Admin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Após subir os serviços, acesse o painel administrativo de cada aplicação (Integrador e Painel) para cadastrar as instâncias do Moodle disponíveis.
 
@@ -101,9 +167,9 @@ Após subir os serviços, acesse o painel administrativo de cada aplicação (In
 Implantação em Produção (Docker)
 --------------------------------
 
-O deploy é simplificado pelo uso de imagens Docker oficiais disponibilizadas no Docker Hub da instituição.
+O deploy da suite em produção é simplificado pelo uso de contêineres Docker das imagens oficiais publicadas no Docker Hub. Abaixo, apresenta-se um exemplo de arquivo ``docker-compose.yml`` completo, integrando o **Painel AVA**, o **Integrador AVA**, e suas dependências de cache e banco de dados.
 
-Exemplo de arquivo `docker-compose.yml` para produção do **Painel AVA**:
+Exemplo de arquivo `docker-compose.yml` para produção:
 
 .. code-block:: yaml
 
@@ -112,7 +178,7 @@ Exemplo de arquivo `docker-compose.yml` para produção do **Painel AVA**:
        image: redis:7.2-alpine
        healthcheck:
          test: ["CMD", "redis-cli", "ping"]
-         interval: 3s
+         interval: 5s
          timeout: 3s
          retries: 3
 
@@ -120,30 +186,57 @@ Exemplo de arquivo `docker-compose.yml` para produção do **Painel AVA**:
        image: postgres:16-alpine
        environment:
          - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=altere_esta_senha
+         - POSTGRES_PASSWORD=altere_esta_senha_em_producao
        volumes:
          - "./volumes/db_data:/var/lib/postgresql/data"
        healthcheck:
          test: ["CMD", "pg_isready", "-U", "postgres"]
-         interval: 3s
+         interval: 5s
          timeout: 3s
          retries: 3
+
+     integrador:
+       image: ctezlifrn/avaintegrador:latest
+       ports:
+         - "8091:8000"
+       environment:
+         - POSTGRES_HOST=db
+         - POSTGRES_DATABASE=integrador
+         - POSTGRES_USER=postgres
+         - POSTGRES_PASSWORD=altere_esta_senha_em_producao
+         - DJANGO_DEBUG=False
+         - DJANGO_ALLOWED_HOSTS=integrador.suainstituicao.edu.br
+         - DJANGO_SECRET_KEY=chave_secreta_django_do_integrador_aqui
+         - OAUTH_BASE_URL=https://suap.suainstituicao.edu.br
+         - OAUTH_CLIENT_ID=client_id_do_integrador_no_suap
+         - OAUTH_CLIENT_SECRET=client_secret_do_integrador_no_suap
+         - OAUTH_REDIRECT_URI=https://integrador.suainstituicao.edu.br/authenticate/
+         - SUAP_INTEGRADOR_KEY=token_de_seguranca_compartilhado_com_suap
+       depends_on:
+         cache:
+           condition: service_healthy
+         db:
+           condition: service_healthy
 
      painel:
        image: ctezlifrn/avapainel:latest
        ports:
-         - 80:8000
+         - "8092:8000"
        environment:
          - POSTGRES_HOST=db
+         - POSTGRES_DATABASE=painel
          - POSTGRES_USER=postgres
-         - POSTGRES_PASSWORD=altere_esta_senha
+         - POSTGRES_PASSWORD=altere_esta_senha_em_producao
          - DJANGO_DEBUG=False
          - DJANGO_ALLOWED_HOSTS=ava.suainstituicao.edu.br
-         - DJANGO_SECRET_KEY=sua_chave_secreta_django_aqui
-         - OAUTH_CLIENT_ID=client_id_oauth2_do_suap
-         - OAUTH_CLIENT_SECRET=client_secret_oauth2_do_suap
+         - DJANGO_SECRET_KEY=chave_secreta_django_do_painel_aqui
          - OAUTH_BASE_URL=https://suap.suainstituicao.edu.br
+         - OAUTH_CLIENT_ID=client_id_do_painel_no_suap
+         - OAUTH_CLIENT_SECRET=client_secret_do_painel_no_suap
          - OAUTH_REDIRECT_URI=https://ava.suainstituicao.edu.br/authenticate/
+         - SUAP_INTEGRADOR_KEY=token_de_seguranca_compartilhado_com_suap
+         - SHOW_VLIBRAS=True
+         - SHOW_USERWAY=False
        volumes:
          - "./volumes/painel_media:/var/media"
          - "./volumes/painel_static:/var/static"
