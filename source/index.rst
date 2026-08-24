@@ -40,9 +40,10 @@ A documentação foi organizada em seções direcionadas para cada perfil de usu
 
 1. :doc:`Visão Geral para Gestores <visao_geral>`: Apresentação de alto nível da suíte, contextualizando a integração entre as múltiplas instâncias do Moodle e o SUAP. Explica de forma executiva os benefícios da centralização (Painel AVA) e da automação (Integrador AVA).
 2. :doc:`Guia do Desenvolvedor e Infraestrutura <desenvolvimento_implantacao>`: Explicação da arquitetura de microsserviços, guia de setup local com Docker Compose, mapeamento das variáveis de ambiente críticas, instalação de gates de qualidade (`pre-commit` e limites de cobertura de testes unitários) e instalação dos plugins no Moodle.
-3. :doc:`Guia da Secretaria Acadêmica <secretaria>`: Instruções para a equipe de registro escolar sobre como habilitar diários e cursos no SUAP para que a sincronização ocorra, além de guias de resolução para problemas comuns de acesso.
-4. :doc:`Guia do Professor (Docente) <professor>`: Manual prático explicando como solicitar a sincronização de diários, como puxar notas do Moodle para o SUAP e a **configuração crítica e obrigatória do livro de notas do Moodle**.
-5. :doc:`Dúvidas Frequentes (FAQ) <duvidas_frequentes>`: Respostas para dúvidas comuns sobre o funcionamento e boas práticas de integração da suite, divididas pelos perfis de TIC, Professores e Secretaria Acadêmica.
+3. :doc:`Repositórios do Ecossistema <repositorios>`: Catálogo de todos os repositórios da organização — plugins Moodle, aplicações Django, bibliotecas Python e infraestrutura — com link para cada repositório e sua documentação própria.
+4. :doc:`Guia da Secretaria Acadêmica <secretaria>`: Instruções para a equipe de registro escolar sobre como habilitar diários e cursos no SUAP para que a sincronização ocorra, além de guias de resolução para problemas comuns de acesso.
+5. :doc:`Guia do Professor (Docente) <professor>`: Manual prático explicando como solicitar a sincronização de diários, como puxar notas do Moodle para o SUAP e a **configuração crítica e obrigatória do livro de notas do Moodle**.
+6. :doc:`Dúvidas Frequentes (FAQ) <duvidas_frequentes>`: Respostas para dúvidas comuns sobre o funcionamento e boas práticas de integração da suite, divididas pelos perfis de TIC, Professores e Secretaria Acadêmica.
 
 .. toctree::
    :maxdepth: 2
@@ -50,6 +51,7 @@ A documentação foi organizada em seções direcionadas para cada perfil de usu
 
    visao_geral
    desenvolvimento_implantacao
+   repositorios
    secretaria
    professor
    duvidas_frequentes
