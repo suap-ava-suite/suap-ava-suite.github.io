@@ -1,0 +1,22 @@
+{#
+  Página de conteúdo do tema "avasuite". Envolve o corpo em .container e, fora da home,
+  adiciona um mini-sumário "Nesta página" (compensando a ausência de sidebar) quando a
+  página tem mais de uma seção.
+#}
+{%- extends "layout.html" %}
+
+{%- block body_tag %}<body class="{% if pagename == root_doc %}is-home{% endif %}">{% endblock %}
+
+{%- block content %}
+<main class="container page-content">
+  {%- if pagename != root_doc and toc %}
+  <nav class="page-toc" aria-label="{{ _('Nesta página') }}">
+    <p class="page-toc-label">Nesta página</p>
+    {{ toc }}
+  </nav>
+  {%- endif %}
+  <div class="rst-content" role="main">
+    {% block body %}{{ body }}{% endblock %}
+  </div>
+</main>
+{%- endblock %}

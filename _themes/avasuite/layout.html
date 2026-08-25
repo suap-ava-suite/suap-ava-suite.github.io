@@ -1,0 +1,71 @@
+{#
+  Layout do tema "avasuite": header fixo só de topo (sem sidebar), inspirado no portal
+  hub estático de /home/kelson/projetos/PESSOAL/mbkw/pages. Estende o layout base do
+  Sphinx (basic/layout.html) e sobrescreve os blocos de header/relbar/sidebar/footer.
+#}
+{%- extends "basic/layout.html" %}
+
+{%- block extrahead %}
+  <meta name="description" content="{{ theme_brand_name }} — documentação e catálogo de repositórios." />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@700,800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@0.462.0/dist/umd/lucide.js" defer></script>
+  {{ super() }}
+{%- endblock %}
+
+{%- block header %}
+<header>
+  <div class="container nav-inner">
+    <a href="{{ pathto(root_doc) }}" class="brand">
+      {%- if logo_url %}
+      <img class="brand-logo" src="{{ logo_url }}" alt="{{ logo_alt|default(theme_brand_name, true) }}" />
+      {%- else %}
+      <span class="brand-logo">{{ theme_brand_short }}</span>
+      {%- endif %}
+      <span>{{ theme_brand_name }}</span>
+    </a>
+    <nav class="site-nav" aria-label="{{ _('Navegação principal') }}">
+      {%- for navpage, navtitle in [
+        ('visao_geral', 'Visão geral'),
+        ('desenvolvimento_implantacao', 'Desenvolvimento'),
+        ('secretaria', 'Secretaria'),
+        ('professor', 'Professor'),
+        ('duvidas_frequentes', 'FAQ'),
+      ] %}
+      <a href="{{ pathto(navpage) }}"{% if pagename == navpage %} class="active"{% endif %}>{{ navtitle }}</a>
+      {%- endfor %}
+    </nav>
+    <div class="nav-actions">
+      <div class="header-search">
+        <i data-lucide="search"></i>
+        {%- include "searchbox.html" %}
+      </div>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="{{ _('Alternar tema') }}" type="button">
+        <i data-lucide="sun" id="themeIcon"></i>
+        <span id="themeLabel">Claro</span>
+      </button>
+      <a href="{{ theme_github_url }}" target="_blank" rel="noopener" class="btn-secondary">
+        <i data-lucide="github"></i> GitHub
+      </a>
+    </div>
+  </div>
+</header>
+{%- endblock %}
+
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+
+{%- block sidebar1 %}{% endblock %}
+{%- block sidebar2 %}{% endblock %}
+
+{%- block footer %}
+<footer>
+  <div class="container">
+    <p>&copy; {{ theme_brand_name }} — Licença MIT. Um ecossistema open source do IFRN.</p>
+    <p style="margin-top: 0.5rem;">
+      <a href="{{ theme_github_url }}" target="_blank" rel="noopener">Organização no GitHub</a>
+      &bull;
+      <a href="{{ pathto(root_doc) }}">Início</a>
+    </p>
+  </div>
+</footer>
+{%- endblock %}

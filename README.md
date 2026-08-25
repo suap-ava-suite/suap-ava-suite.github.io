@@ -32,7 +32,7 @@ Você pode compilar e visualizar as alterações no seu navegador antes de envia
 ### 1. Criar o Ambiente Virtual e Instalar Dependências
 ```bash
 # Navegue até o repositório da documentação
-cd ~/projetos/IFRN/suap-ava-suite/suap-ava-suite.github.io
+cd ~/projetos/IFRN/sas/pages
 
 # Crie o ambiente virtual do Python na pasta .venv
 python3 -m venv .venv
